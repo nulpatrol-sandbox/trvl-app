@@ -1,0 +1,18 @@
+version: '3'
+services:
+  app:
+    build: ./nginx
+    links:
+      - mongo:mongo
+    ports:
+      - 80:80
+  mongo:
+    build: ./mongo
+    ports:
+      - 27017:27017
+  pm2:
+    build: ./pm2
+    volumes:
+      - './src:/var/www/'
+    ports:
+      - 8085:8085
